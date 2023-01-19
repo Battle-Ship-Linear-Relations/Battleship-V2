@@ -589,13 +589,15 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
 
     /**
      * find the greatest common denominator between 2 numbers to simplify a fraction
+     * @param int numberator, the numerator of the fraction
+     * @param int demoninator, the denominator of the fraction
      * @return int, the gcd between the 2 numbers
      */
-    public int __gcd(int a, int b)
+    public int __gcd(int numerator, int denominator)
     {
-        if (b == 0)
-            return a;
-        return __gcd(b, a % b); //recurssion to keep finding the gcd
+        if (denominator == 0)
+            return numerator;
+        return __gcd(denominator, numerator % denominator); //recurssion to keep finding the gcd
          
     }
 
