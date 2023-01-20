@@ -12,3 +12,4 @@ Possible Ideas:
 
 
 Known Bugs:
+- the bot may be able to input slopes that never occur within the range of the game board
