@@ -254,7 +254,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
         for (int i = 0; i < play.length; i++) {
             for (int j = 0; j < play.length; j++) {
                 buttonPressed(i, j); // initialize what happes to the buttons over hover and when pressed
-                buttonSet(i, j);
+                bottonHover(i, j);
             }
         }
 
@@ -290,7 +290,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
      * @param int yCoord, the y value of the button
      * @return void
      */
-    public void buttonSet(int xCoord, int yCoord) {
+    public void bottonHover(int xCoord, int yCoord) {
         
         play[xCoord][yCoord].addMouseListener(new java.awt.event.MouseAdapter() {
             /**
@@ -457,7 +457,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
      * @param int yCoord, the y value of the button
      * @return void
      */
-    public void buttonPressed2(int xCoord, int yCoord) { // if the robot is confirming its ships
+    public void computerButtonPressed(int xCoord, int yCoord) { // if the robot is confirming its ships
                     
         if (shipCount == 3) {
             if (ShipLength.shipLength4(play2, rotate, player, xCoord, yCoord)) {
@@ -577,7 +577,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                 rotate += (int)Math.floor(Math.random()*(10));
                 int xCoord = (int)Math.floor(Math.random()*(play2.length));
                 int yCoord = (int)Math.floor(Math.random()*(play2.length)); // select a random location for the bot's ships
-                buttonPressed2(xCoord, yCoord);
+                computerButtonPressed(xCoord, yCoord);
                 if (shipCount == 6) timer2.cancel();
             }
         };
@@ -597,10 +597,10 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
      * @param int demoninator, the denominator of the fraction
      * @return int, the gcd between the 2 numbers
      */
-    public int __gcd(int numerator, int denominator)
+    public int greatestCommonDenominator(int numerator, int denominator)
     {
         if (denominator == 0) return numerator;
-        return __gcd(denominator, numerator % denominator); //recurssion to keep finding the gcd
+        return greatestCommonDenominator(denominator, numerator % denominator); //recurssion to keep finding the gcd
          
     }
 
@@ -681,7 +681,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                     errorLabel.setText("Error, please try again");
                 } else {
 
-                    int simplifyFraction = __gcd(rise, run); // find the gcd from the rise and run values
+                    int simplifyFraction = greatestCommonDenominator(rise, run); // find the gcd from the rise and run values
             
                     rise /= simplifyFraction; //divide the integers with the gcd found
                     run /= simplifyFraction;
@@ -779,7 +779,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
     }
 
     /**
-     * when eiither player is trying to guess a spot on the game
+     * when either player is trying to guess a spot on the game
      * @param int xCoord, the x coordinate passed
      * @param int yCoord, the y coordinate passed
      * @return void
@@ -953,7 +953,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                             rise = (int)Math.floor(Math.random()*((play.length/2)-(-play.length/2)+1)+(-play.length/2));
                             run = (int)Math.floor(Math.random()*((play.length/2)-(-play.length/2)+1)+(-play.length/2));
                         }
-                        int simplifyFraction = __gcd(rise, run); //find the greatest common denominator between the 2 numbers
+                        int simplifyFraction = greatestCommonDenominator(rise, run); //find the greatest common denominator between the 2 numbers
                         rise /= simplifyFraction; // diving the rise and run by the gcd found
                         run /= simplifyFraction;
                         int xCoord = 0;
