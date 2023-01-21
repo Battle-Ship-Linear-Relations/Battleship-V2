@@ -39,4 +39,4 @@ Possible Ideas:
 
 
 Known Bugs:
-- the botand user may be able to input slopes that never occur within the range of the game board
+- the bot and user may be able to input slopes that never occur within the range of the game board
