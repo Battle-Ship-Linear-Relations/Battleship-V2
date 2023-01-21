@@ -40,3 +40,4 @@ Possible Ideas:
 
 Known Bugs:
 - the bot and user may be able to input slopes that never occur within the range of the game board
+- the game may say a slope is repeated if no new points are plotted on the board
