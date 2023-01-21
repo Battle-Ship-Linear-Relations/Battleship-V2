@@ -222,6 +222,10 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
     }
 
 
+    /**
+     * initailize the functions of the game and display the needed buttons/textfeild depending on the difficulty
+     * @return void
+     */
     public void startGame(int level) {
         difficulty = level;
         difficultyLabel.setVisible(false);
@@ -555,7 +559,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                     playerTurn++;
                     turnJLabel.setText("<html>Computer's<br/>Turn</html>"); // once the user has placed all of their ships, indicate its the coputer's turn and allow the bot to play its ship
                     instructionLabel.setVisible(false);
-                    botGuessShips(); // tell the computer to place its ships
+                    botPlaceShips(); // tell the computer to place its ships
                 }
             }
         });
@@ -565,7 +569,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
      * when it is the robot's turn to place ships, it will select random coordinates
      * @return void
      */
-    public void botGuessShips() {
+    public void botPlaceShips() {
 
         TimerTask task2 = new TimerTask() {
             @Override
@@ -595,8 +599,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
      */
     public int __gcd(int numerator, int denominator)
     {
-        if (denominator == 0)
-            return numerator;
+        if (denominator == 0) return numerator;
         return __gcd(denominator, numerator % denominator); //recurssion to keep finding the gcd
          
     }
@@ -626,7 +629,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                         coordinateField.setBackground(Color.lightGray);
                         coordinateField.setFocusable(false);
                         playerTurn++;
-                        robotTurn();
+                        botGuessShip();
                     }
                     else if(guessSpot(xCoord, yCoord) == 2){ // if the coordinate is valid and you win the game
                         coordinateField.setBackground(Color.lightGray);
@@ -747,7 +750,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                         }
                         else if (count != count2){ // if the number of X's before the slope doesn't equal the number of X's after, this means they already guessed that coordinate and it would not make a difference
                             playerTurn++; //increment player turn
-                            robotTurn(); // tell the computer to guess a slope
+                            botGuessShip(); // tell the computer to guess a slope
                         }
                         else { // if the slope has already been guessed
                             errorLabel.setVisible(true);
@@ -911,7 +914,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
      * the computer selects random spots to guess on the user's ships
      * @return void
      */
-    public void robotTurn() { // the computer's turn
+    public void botGuessShip() { // the computer's turn
         
     java.util.Timer timer3 = new java.util.Timer();
         TimerTask task3 = new TimerTask() { // starts a timer to immatate the time a person would take 
