@@ -550,11 +550,8 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                 }
 
                 if (shipCount <= 3) shipType.setText("Ship: " + ships[shipCount]); // display the type of ship being placed based on length
-
                 if (shipCount == 3) {
                     player = Color.BLUE; // when shipCount is equal to 3 (the user has placed all thier ships), set player to Colour Blue
-                }
-                if (shipCount == 3) {
                     repaint();
                     playerTurn++;
                     turnJLabel.setText("<html>Computer's<br/>Turn</html>"); // once the user has placed all of their ships, indicate its the coputer's turn and allow the bot to userBoard its ship
