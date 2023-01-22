@@ -578,7 +578,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                 if (shipCount == 6) timer2.cancel();
             }
         };
-        timer2.scheduleAtFixedRate(task2, 3000, 3000); // set a timer, so the placement seems realitic as if a person is placing the sips
+        timer2.scheduleAtFixedRate(task2, 3000, 3000); // set a timer, so the placement seems realitic as if a person is placing the ships
         for (int i = 0; i < computerBoard.length; i++) {
             for (int j = 0; j < computerBoard[0].length; j++) {
                 computerBoard[i][j].setVisible(false); // set the computers board to no visible
@@ -594,8 +594,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
      * @param int demoninator, the denominator of the fraction
      * @return int, the gcd between the 2 numbers
      */
-    public int greatestCommonDenominator(int numerator, int denominator)
-    {
+    public int greatestCommonDenominator(int numerator, int denominator) {
         if (denominator == 0) return numerator;
         return greatestCommonDenominator(denominator, numerator % denominator); //recurssion to keep finding the gcd
          
