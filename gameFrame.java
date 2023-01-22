@@ -10,8 +10,8 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
     ImageIcon logo = new ImageIcon(new ImageIcon("logo.png").getImage().getScaledInstance(350, 100, Image.SCALE_SMOOTH)); // scale the image to be the right size
     ImageIcon background = new ImageIcon("Background.jpg");
     ImageIcon gridImage = new ImageIcon(new ImageIcon("grid.png").getImage().getScaledInstance(555, 558, Image.SCALE_SMOOTH)); // scale the image to be the right size
-    JButton play[][] = new JButton[11][11]; //size of the game
-    JButton play2[][] = new JButton[play.length][play[0].length];
+    JButton userBoard[][] = new JButton[11][11]; //size of the game
+    JButton computerBoard[][] = new JButton[userBoard.length][userBoard[0].length];
     JLabel logoLabel = new JLabel(logo);
     JLabel equationLabel = new JLabel("y = — x + ");
     JTextField riseTextField = new JTextField();
@@ -48,7 +48,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
      */
     gameFrame() { // initialize everything that is going to be on the GUI
         setVisible(true); 
-        setSize(1000, 750); // set the bouds of the game
+        setSize(1000, 750); // set the bounds of the game
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Battleship");
@@ -56,7 +56,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
         setContentPane(new JLabel(background)); // set the background of the game
         add(logoLabel);        
 
-        resetButton.setFont(new Font("Verdana", Font.BOLD, 25)); // button to play again after someone has won the game
+        resetButton.setFont(new Font("Verdana", Font.BOLD, 25)); // button to userBoard again after someone has won the game
         resetButton.setBounds(655, 570, 200, 75);
         resetButton.setForeground(Color.BLACK);
         resetButton.setVisible(false);
@@ -186,29 +186,29 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
         yIntTextField.setFont(new Font("Verdana", Font.BOLD, 40));
 
         
-        for (int i = 0; i < play.length; i ++) { //initializes both set of buttons (boards for the game)
-            for (int j = 0; j < play[0].length; j++) {
-                play[i][j] = new JButton(); // play if the array of buttons the user will be playing on
-                play[i][j].setBounds(i * 46 + 50, j * 46 + 125, 46, 46); // set the location and size of the buttons
-                play[i][j].setFocusable(false);
-                play[i][j].setVisible(true);
-                play[i][j].setFont(new Font("Verdana", Font.BOLD, 0));      
-                play[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK, 0)); //remove the outlines of the buttons           
-                play[i][j].setBackground(Color.lightGray);// initialize what happens when the button is pressed
-                play[i][j].setText("");
-                add(play[i][j]);  //add the user's buttons to the game 
+        for (int i = 0; i < userBoard.length; i ++) { //initializes both set of buttons (boards for the game)
+            for (int j = 0; j < userBoard[0].length; j++) {
+                userBoard[i][j] = new JButton(); // userBoard if the array of buttons the user will be playing on
+                userBoard[i][j].setBounds(i * 46 + 50, j * 46 + 125, 46, 46); // set the location and size of the buttons
+                userBoard[i][j].setFocusable(false);
+                userBoard[i][j].setVisible(true);
+                userBoard[i][j].setFont(new Font("Verdana", Font.BOLD, 0));      
+                userBoard[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK, 0)); //remove the outlines of the buttons           
+                userBoard[i][j].setBackground(Color.lightGray);// initialize what happens when the button is pressed
+                userBoard[i][j].setText("");
+                add(userBoard[i][j]);  //add the user's buttons to the game 
 
 
-                play2[i][j] = new JButton(); //play2 is the array of buttons the comupter will be playing on
-                play2[i][j].setBounds(i * 46 + 50, j * 46 + 125, 46, 46); // set the location and size of the buttons
-                play2[i][j].setFocusable(false);
-                play2[i][j].setVisible(true);
-                play2[i][j].setFont(new Font("Verdana", Font.BOLD, 0));               
-                play2[i][j].setBackground(Color.lightGray);
-                play2[i][j].setText("");
-                play2[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK, 0)); //remove the outlines of the buttons
-                play2[i][j].setVisible(false); // the compiuter's game should not be visible to the user
-                add(play2[i][j]);  //add the computer's buttons to the game 
+                computerBoard[i][j] = new JButton(); //computerBoard is the array of buttons the comupter will be playing on
+                computerBoard[i][j].setBounds(i * 46 + 50, j * 46 + 125, 46, 46); // set the location and size of the buttons
+                computerBoard[i][j].setFocusable(false);
+                computerBoard[i][j].setVisible(true);
+                computerBoard[i][j].setFont(new Font("Verdana", Font.BOLD, 0));               
+                computerBoard[i][j].setBackground(Color.lightGray);
+                computerBoard[i][j].setText("");
+                computerBoard[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK, 0)); //remove the outlines of the buttons
+                computerBoard[i][j].setVisible(false); // the compiuter's game should not be visible to the user
+                add(computerBoard[i][j]);  //add the computer's buttons to the game 
             }
         }
         
@@ -238,21 +238,21 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_R){
                     rotate++;
-                    for (int i = 0; i < play.length; i ++) {
-                        for (int j = 0; j < play[0].length; j++) {
-                            if(play[i][j].getText().equals("")) play[i][j].setBackground(Color.lightGray); // reset the colour of the board to the ship before it was rotate is no longer visible
-                            else if(play[i][j].getText().equals("0") || play[i][j].getText().equals("1") || play[i][j].getText().equals("2") && playerTurn % 2 == 0) play[i][j].setBackground(Color.GREEN); //reset the colours, but if a ship is present make the colour green
+                    for (int i = 0; i < userBoard.length; i ++) {
+                        for (int j = 0; j < userBoard[0].length; j++) {
+                            if(userBoard[i][j].getText().equals("")) userBoard[i][j].setBackground(Color.lightGray); // reset the colour of the board to the ship before it was rotate is no longer visible
+                            else if(userBoard[i][j].getText().equals("0") || userBoard[i][j].getText().equals("1") || userBoard[i][j].getText().equals("2") && playerTurn % 2 == 0) userBoard[i][j].setBackground(Color.GREEN); //reset the colours, but if a ship is present make the colour green
                         }
                     }
-                    if (shipCount == 0) ShipLength.shipLength4(play, rotate, player, mouseX, mouseY); //call the shipLength methods after the ship is rotated, so the ship is still visible after it is rotated
-                    if (shipCount == 1) ShipLength.shipLength3(play, rotate, player, mouseX, mouseY);
-                    if (shipCount == 2) ShipLength.shipLength2(play, rotate, player, mouseX, mouseY);
+                    if (shipCount == 0) ShipLength.shipLength4(userBoard, rotate, player, mouseX, mouseY); //call the shipLength methods after the ship is rotated, so the ship is still visible after it is rotated
+                    if (shipCount == 1) ShipLength.shipLength3(userBoard, rotate, player, mouseX, mouseY);
+                    if (shipCount == 2) ShipLength.shipLength2(userBoard, rotate, player, mouseX, mouseY);
                     repaint();
                 }
             }
         });
-        for (int i = 0; i < play.length; i++) {
-            for (int j = 0; j < play.length; j++) {
+        for (int i = 0; i < userBoard.length; i++) {
+            for (int j = 0; j < userBoard.length; j++) {
                 buttonPressed(i, j); // initialize what happes to the buttons over hover and when pressed
                 bottonHover(i, j);
             }
@@ -275,10 +275,10 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
     }
 
     /**
-     * if the play again button is pressed, create a new game
+     * if the userBoard again button is pressed, create a new game
      * @return void
      */
-    public void playAgain() { // if play again is pressed, detroy the current JFrame and create a new one.
+    public void playAgain() { // if userBoard again is pressed, detroy the current JFrame and create a new one.
         dispose(); // destroy the current JFrame
         new gameFrame(); // create a new JFrame
     }
@@ -292,7 +292,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
      */
     public void bottonHover(int xCoord, int yCoord) {
         
-        play[xCoord][yCoord].addMouseListener(new java.awt.event.MouseAdapter() {
+        userBoard[xCoord][yCoord].addMouseListener(new java.awt.event.MouseAdapter() {
             /**
              * if the mouse hovers over a button
              * @param MouseEvent evt
@@ -300,9 +300,9 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
              */
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 if (shipCount != 3) { // while the ship count is not equal to 3 (it is the user's turn), if not do nothing on hover afterwards
-                    if (shipCount == 0) ShipLength.shipLength4(play, rotate, player, xCoord, yCoord); // when on hover, depending on the length of the ship being placed, change the colour of the JButtons to represent a ship
-                    if (shipCount == 1) ShipLength.shipLength3(play, rotate, player, xCoord, yCoord);
-                    if (shipCount == 2) ShipLength.shipLength2(play, rotate, player, xCoord, yCoord);
+                    if (shipCount == 0) ShipLength.shipLength4(userBoard, rotate, player, xCoord, yCoord); // when on hover, depending on the length of the ship being placed, change the colour of the JButtons to represent a ship
+                    if (shipCount == 1) ShipLength.shipLength3(userBoard, rotate, player, xCoord, yCoord);
+                    if (shipCount == 2) ShipLength.shipLength2(userBoard, rotate, player, xCoord, yCoord);
                     mouseX = xCoord; // set the location of the mouse to the x and y values of the buttons
                     mouseY = yCoord;
 
@@ -318,55 +318,55 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                 try {
                     if (shipCount == 0) { //if the shipCount is 0, the length of the ship is 4
                         if (rotate % 2 == 0) { // if the ship is placed vertically
-                            if (yCoord < play.length - 3) {//if the ship is within the range of the game
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord + 1].getText().equals("")) play[xCoord][yCoord + 1].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord + 2].getText().equals("")) play[xCoord][yCoord + 2].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord + 3].getText().equals("")) play[xCoord][yCoord + 3].setBackground(Color.lightGray);
+                            if (yCoord < userBoard.length - 3) {//if the ship is within the range of the game
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord + 1].getText().equals("")) userBoard[xCoord][yCoord + 1].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord + 2].getText().equals("")) userBoard[xCoord][yCoord + 2].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord + 3].getText().equals("")) userBoard[xCoord][yCoord + 3].setBackground(Color.lightGray);
                             }
-                            if (yCoord == play.length - 3) { // if the user is trying to place a ship outside of the game, adjust it so it moves inside (applies to if statements below)
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord + 1].getText().equals("")) play[xCoord][yCoord + 1].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord - 1].getText().equals("")) play[xCoord][yCoord - 1].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord + 2].getText().equals("")) play[xCoord][yCoord + 2].setBackground(Color.lightGray);
+                            if (yCoord == userBoard.length - 3) { // if the user is trying to place a ship outside of the game, adjust it so it moves inside (applies to if statements below)
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord + 1].getText().equals("")) userBoard[xCoord][yCoord + 1].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord - 1].getText().equals("")) userBoard[xCoord][yCoord - 1].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord + 2].getText().equals("")) userBoard[xCoord][yCoord + 2].setBackground(Color.lightGray);
                             }
-                            if (yCoord == play.length - 2) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord + 1].getText().equals("")) play[xCoord][yCoord + 1].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord - 1].getText().equals("")) play[xCoord][yCoord - 1].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord - 2].getText().equals("")) play[xCoord][yCoord - 2].setBackground(Color.lightGray);
+                            if (yCoord == userBoard.length - 2) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord + 1].getText().equals("")) userBoard[xCoord][yCoord + 1].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord - 1].getText().equals("")) userBoard[xCoord][yCoord - 1].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord - 2].getText().equals("")) userBoard[xCoord][yCoord - 2].setBackground(Color.lightGray);
                             }
-                            if (yCoord == play.length - 1) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord - 1].getText().equals("")) play[xCoord][yCoord-  1].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord - 2].getText().equals("")) play[xCoord][yCoord - 2].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord - 3].getText().equals("")) play[xCoord][yCoord - 3].setBackground(Color.lightGray);
+                            if (yCoord == userBoard.length - 1) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord - 1].getText().equals("")) userBoard[xCoord][yCoord-  1].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord - 2].getText().equals("")) userBoard[xCoord][yCoord - 2].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord - 3].getText().equals("")) userBoard[xCoord][yCoord - 3].setBackground(Color.lightGray);
                             }
                         }
                         if (rotate % 2 == 1) { // if the ship is places horizontally
-                            if (xCoord < play.length - 3) {// previous commets for this method apply below depending on the size of the ship being placed
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord + 1][yCoord].getText().equals("")) play[xCoord + 1][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord + 2][yCoord].getText().equals("")) play[xCoord + 2][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord + 3][yCoord].getText().equals("")) play[xCoord + 3][yCoord].setBackground(Color.lightGray);
+                            if (xCoord < userBoard.length - 3) {// previous commets for this method apply below depending on the size of the ship being placed
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord + 1][yCoord].getText().equals("")) userBoard[xCoord + 1][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord + 2][yCoord].getText().equals("")) userBoard[xCoord + 2][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord + 3][yCoord].getText().equals("")) userBoard[xCoord + 3][yCoord].setBackground(Color.lightGray);
                             }
-                            if (xCoord == play.length - 3) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord + 1][yCoord].getText().equals("")) play[xCoord + 1][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord - 1][yCoord].getText().equals("")) play[xCoord - 1][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord + 2][yCoord].getText().equals("")) play[xCoord + 2][yCoord].setBackground(Color.lightGray);
+                            if (xCoord == userBoard.length - 3) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord + 1][yCoord].getText().equals("")) userBoard[xCoord + 1][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord - 1][yCoord].getText().equals("")) userBoard[xCoord - 1][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord + 2][yCoord].getText().equals("")) userBoard[xCoord + 2][yCoord].setBackground(Color.lightGray);
                             }
-                            if (xCoord == play.length - 2) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord + 1][yCoord].getText().equals("")) play[xCoord + 1][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord - 1][yCoord].getText().equals("")) play[xCoord - 1][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord - 2][yCoord].getText().equals("")) play[xCoord - 2][yCoord].setBackground(Color.lightGray);
+                            if (xCoord == userBoard.length - 2) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord + 1][yCoord].getText().equals("")) userBoard[xCoord + 1][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord - 1][yCoord].getText().equals("")) userBoard[xCoord - 1][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord - 2][yCoord].getText().equals("")) userBoard[xCoord - 2][yCoord].setBackground(Color.lightGray);
                             }
-                            if (xCoord == play.length - 1) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord - 1][yCoord].getText().equals("")) play[xCoord - 1][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord - 2][yCoord].getText().equals("")) play[xCoord - 2][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord - 3][yCoord].getText().equals("")) play[xCoord - 3][yCoord].setBackground(Color.lightGray);
+                            if (xCoord == userBoard.length - 1) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord - 1][yCoord].getText().equals("")) userBoard[xCoord - 1][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord - 2][yCoord].getText().equals("")) userBoard[xCoord - 2][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord - 3][yCoord].getText().equals("")) userBoard[xCoord - 3][yCoord].setBackground(Color.lightGray);
                             }
                         }
                     }
@@ -374,37 +374,37 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
 
                     if (shipCount == 1) { // if the shipCount is 1, the length of the ship if 3
                         if (rotate % 2 == 0) {
-                            if (yCoord < play.length - 2) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord + 1].getText().equals("")) play[xCoord][yCoord + 1].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord + 2].getText().equals("")) play[xCoord][yCoord + 2].setBackground(Color.lightGray);
+                            if (yCoord < userBoard.length - 2) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord + 1].getText().equals("")) userBoard[xCoord][yCoord + 1].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord + 2].getText().equals("")) userBoard[xCoord][yCoord + 2].setBackground(Color.lightGray);
                             }
-                            if (yCoord == play.length - 2) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord + 1].getText().equals("")) play[xCoord][yCoord + 1].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord - 1].getText().equals("")) play[xCoord][yCoord - 1].setBackground(Color.lightGray);
+                            if (yCoord == userBoard.length - 2) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord + 1].getText().equals("")) userBoard[xCoord][yCoord + 1].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord - 1].getText().equals("")) userBoard[xCoord][yCoord - 1].setBackground(Color.lightGray);
                             }
-                            if (yCoord == play.length - 1) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord - 1].getText().equals("")) play[xCoord][yCoord-  1].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord - 2].getText().equals("")) play[xCoord][yCoord - 2].setBackground(Color.lightGray);
+                            if (yCoord == userBoard.length - 1) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord - 1].getText().equals("")) userBoard[xCoord][yCoord-  1].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord - 2].getText().equals("")) userBoard[xCoord][yCoord - 2].setBackground(Color.lightGray);
                             }
                         }
                         if (rotate % 2 == 1) { // if the ship is places horizontally
-                            if (xCoord < play.length - 2) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord + 1][yCoord].getText().equals("")) play[xCoord + 1][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord + 2][yCoord].getText().equals("")) play[xCoord + 2][yCoord].setBackground(Color.lightGray);
+                            if (xCoord < userBoard.length - 2) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord + 1][yCoord].getText().equals("")) userBoard[xCoord + 1][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord + 2][yCoord].getText().equals("")) userBoard[xCoord + 2][yCoord].setBackground(Color.lightGray);
                             }
-                            if (xCoord == play.length - 2) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord + 1][yCoord].getText().equals("")) play[xCoord + 1][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord - 1][yCoord].getText().equals("")) play[xCoord - 1][yCoord].setBackground(Color.lightGray);
+                            if (xCoord == userBoard.length - 2) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord + 1][yCoord].getText().equals("")) userBoard[xCoord + 1][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord - 1][yCoord].getText().equals("")) userBoard[xCoord - 1][yCoord].setBackground(Color.lightGray);
                             }
-                            if (xCoord == play.length - 1) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord - 1][yCoord].getText().equals("")) play[xCoord - 1][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord - 2][yCoord].getText().equals("")) play[xCoord - 2][yCoord].setBackground(Color.lightGray);
+                            if (xCoord == userBoard.length - 1) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord - 1][yCoord].getText().equals("")) userBoard[xCoord - 1][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord - 2][yCoord].getText().equals("")) userBoard[xCoord - 2][yCoord].setBackground(Color.lightGray);
                             }
                         }
                     }
@@ -412,23 +412,23 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
 
                     if (shipCount == 2) { //  if the shipCount is 2, the length of the ship is 2
                         if (rotate % 2 == 0) { // if the ship is places vertically
-                            if (yCoord < play.length - 1) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord + 1].getText().equals("")) play[xCoord][yCoord + 1].setBackground(Color.lightGray);
+                            if (yCoord < userBoard.length - 1) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord + 1].getText().equals("")) userBoard[xCoord][yCoord + 1].setBackground(Color.lightGray);
                             }
-                            if (yCoord == play.length - 1) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord][yCoord - 1].getText().equals("")) play[xCoord][yCoord - 1].setBackground(Color.lightGray);
+                            if (yCoord == userBoard.length - 1) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord][yCoord - 1].getText().equals("")) userBoard[xCoord][yCoord - 1].setBackground(Color.lightGray);
                             }
                         }
                         if (rotate % 2 == 1) { // if the ship is places horizontally
-                            if (xCoord < play.length - 1) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord + 1][yCoord].getText().equals("")) play[xCoord + 1][yCoord].setBackground(Color.lightGray);
+                            if (xCoord < userBoard.length - 1) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord + 1][yCoord].getText().equals("")) userBoard[xCoord + 1][yCoord].setBackground(Color.lightGray);
                             }
-                            if (xCoord == play.length - 1) {
-                                if (play[xCoord][yCoord].getText().equals("")) play[xCoord][yCoord].setBackground(Color.lightGray);
-                                if (play[xCoord - 1][yCoord].getText().equals("")) play[xCoord - 1][yCoord].setBackground(Color.lightGray);
+                            if (xCoord == userBoard.length - 1) {
+                                if (userBoard[xCoord][yCoord].getText().equals("")) userBoard[xCoord][yCoord].setBackground(Color.lightGray);
+                                if (userBoard[xCoord - 1][yCoord].getText().equals("")) userBoard[xCoord - 1][yCoord].setBackground(Color.lightGray);
                             }
                         }
                     }
@@ -436,10 +436,10 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
 
 
                     if (shipCount != 3) { // when the user has placed 3 ships, do nothing over hover, and whatever the button has been assigned set their fixed colour that can no longer change
-                        for (int xCoord = 0; xCoord < play.length; xCoord ++) {
-                            for (int yCoord = 0; yCoord < play[0].length; yCoord++) {
-                                if(play[xCoord][yCoord].getText().equals("0") || play[xCoord][yCoord].getText().equals("1") || play[xCoord][yCoord].getText().equals("2")) {
-                                    play[xCoord][yCoord].setBackground(Color.GREEN);
+                        for (int xCoord = 0; xCoord < userBoard.length; xCoord ++) {
+                            for (int yCoord = 0; yCoord < userBoard[0].length; yCoord++) {
+                                if(userBoard[xCoord][yCoord].getText().equals("0") || userBoard[xCoord][yCoord].getText().equals("1") || userBoard[xCoord][yCoord].getText().equals("2")) {
+                                    userBoard[xCoord][yCoord].setBackground(Color.GREEN);
                                 } 
                             }
                         }
@@ -460,31 +460,31 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
     public void computerButtonPressed(int xCoord, int yCoord) { // if the robot is confirming its ships
                     
         if (shipCount == 3) {
-            if (ShipLength.shipLength4(play2, rotate, player, xCoord, yCoord)) {
-                ShipLength.confirmShipLength4(play2, rotate, player, xCoord, yCoord, shipCount);
+            if (ShipLength.shipLength4(computerBoard, rotate, player, xCoord, yCoord)) {
+                ShipLength.confirmShipLength4(computerBoard, rotate, player, xCoord, yCoord, shipCount);
                 shipCount++; // increase shipCount if the ship is placed without any errors
             }
         }
         else if (shipCount == 4) {
-            if (ShipLength.shipLength3(play2, rotate, player, xCoord, yCoord)) {
-                ShipLength.confirmShipLength3(play2, rotate, player, xCoord, yCoord, shipCount);
+            if (ShipLength.shipLength3(computerBoard, rotate, player, xCoord, yCoord)) {
+                ShipLength.confirmShipLength3(computerBoard, rotate, player, xCoord, yCoord, shipCount);
                 shipCount++;
             }
         }
         else if (shipCount == 5) {
-            if (ShipLength.shipLength2(play2, rotate, player, xCoord, yCoord)) {
-                ShipLength.confirmShipLength2(play2, rotate, player, xCoord, yCoord, shipCount);
+            if (ShipLength.shipLength2(computerBoard, rotate, player, xCoord, yCoord)) {
+                ShipLength.confirmShipLength2(computerBoard, rotate, player, xCoord, yCoord, shipCount);
                 shipCount++;
             }
         }
         
-        for (int a = 0; a < play2.length; a++) { // after every placement make sure there are only 3 ships and no errors with the placement
-            for (int b = 0; b < play2.length; b++) {
-                if (play2[a][b].getText().equals("")) {
-                    play2[a][b].setBackground(Color.lightGray); // this avoids there being multiple of the same ship if there is an error with its placement
+        for (int a = 0; a < computerBoard.length; a++) { // after every placement make sure there are only 3 ships and no errors with the placement
+            for (int b = 0; b < computerBoard.length; b++) {
+                if (computerBoard[a][b].getText().equals("")) {
+                    computerBoard[a][b].setBackground(Color.lightGray); // this avoids there being multiple of the same ship if there is an error with its placement
                 }
                 else {
-                    play2[a][b].setBackground(Color.BLUE);
+                    computerBoard[a][b].setBackground(Color.BLUE);
                 }
             }
         }
@@ -505,11 +505,11 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
             yIntTextField.setFocusable(true);
             }
             shipType.setVisible(false);
-            for (int q = 0; q < play2.length; q++) {
-                for (int w = 0; w < play2[0].length; w++) {
-                    play2[q][w].setBackground(Color.lightGray); // when all of the computer's shipd have been placed, reset their colour so the user can't see them and change boards with the user
-                    play[q][w].setVisible(false);
-                    play2[q][w].setVisible(true);
+            for (int q = 0; q < computerBoard.length; q++) {
+                for (int w = 0; w < computerBoard[0].length; w++) {
+                    computerBoard[q][w].setBackground(Color.lightGray); // when all of the computer's shipd have been placed, reset their colour so the user can't see them and change boards with the user
+                    userBoard[q][w].setVisible(false);
+                    computerBoard[q][w].setVisible(true);
                 }
             }
             repaint();
@@ -527,7 +527,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
      * @return void
      */
     public void buttonPressed(int xCoord, int yCoord) { // if the user if confirming a ship
-        play[xCoord][yCoord].addActionListener(
+        userBoard[xCoord][yCoord].addActionListener(
         new ActionListener() {
             /**
              * action listener if a button is pressed
@@ -535,17 +535,17 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
              */
             public void actionPerformed(ActionEvent e) {
 
-                if (shipCount == 0 && ShipLength.shipLength4(play, rotate, player, xCoord, yCoord)) {
-                    ShipLength.confirmShipLength4(play, rotate, player, xCoord, yCoord, shipCount); // place a ship of the user's board and if successful, increase the shipcount, so the next length of ship will be placed
+                if (shipCount == 0 && ShipLength.shipLength4(userBoard, rotate, player, xCoord, yCoord)) {
+                    ShipLength.confirmShipLength4(userBoard, rotate, player, xCoord, yCoord, shipCount); // place a ship of the user's board and if successful, increase the shipcount, so the next length of ship will be placed
                     shipCount++;
                 }
-                else if (shipCount == 1 && ShipLength.shipLength3(play, rotate, player, xCoord, yCoord)) {
-                    ShipLength.confirmShipLength3(play, rotate, player, xCoord, yCoord, shipCount);
+                else if (shipCount == 1 && ShipLength.shipLength3(userBoard, rotate, player, xCoord, yCoord)) {
+                    ShipLength.confirmShipLength3(userBoard, rotate, player, xCoord, yCoord, shipCount);
                     shipCount++;
                 }
 
-                else if (shipCount == 2 && ShipLength.shipLength2(play, rotate, player, xCoord, yCoord)) {
-                    ShipLength.confirmShipLength2(play, rotate, player, xCoord, yCoord, shipCount);
+                else if (shipCount == 2 && ShipLength.shipLength2(userBoard, rotate, player, xCoord, yCoord)) {
+                    ShipLength.confirmShipLength2(userBoard, rotate, player, xCoord, yCoord, shipCount);
                     shipCount++;
                 }
 
@@ -557,7 +557,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                 if (shipCount == 3) {
                     repaint();
                     playerTurn++;
-                    turnJLabel.setText("<html>Computer's<br/>Turn</html>"); // once the user has placed all of their ships, indicate its the coputer's turn and allow the bot to play its ship
+                    turnJLabel.setText("<html>Computer's<br/>Turn</html>"); // once the user has placed all of their ships, indicate its the coputer's turn and allow the bot to userBoard its ship
                     instructionLabel.setVisible(false);
                     botPlaceShips(); // tell the computer to place its ships
                 }
@@ -575,17 +575,17 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
             @Override
             public void run() {
                 rotate += (int)Math.floor(Math.random()*(10));
-                int xCoord = (int)Math.floor(Math.random()*(play2.length));
-                int yCoord = (int)Math.floor(Math.random()*(play2.length)); // select a random location for the bot's ships
+                int xCoord = (int)Math.floor(Math.random()*(computerBoard.length));
+                int yCoord = (int)Math.floor(Math.random()*(computerBoard.length)); // select a random location for the bot's ships
                 computerButtonPressed(xCoord, yCoord);
                 if (shipCount == 6) timer2.cancel();
             }
         };
         timer2.scheduleAtFixedRate(task2, 3000, 3000); // set a timer, so the placement seems realitic as if a person is placing the sips
-        for (int i = 0; i < play2.length; i++) {
-            for (int j = 0; j < play2[0].length; j++) {
-                play2[i][j].setVisible(false); // set the computers board to no visible
-                add(play2[i][j]);
+        for (int i = 0; i < computerBoard.length; i++) {
+            for (int j = 0; j < computerBoard[0].length; j++) {
+                computerBoard[i][j].setVisible(false); // set the computers board to no visible
+                add(computerBoard[i][j]);
             }
         }
         playerTurn++; // increase player turn 
@@ -617,7 +617,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                 String parts[] = String.valueOf(coordinateField.getText()).split(","); // split the contents of the coordinate and 
                 int xCoord = Integer.valueOf(parts[0].trim().substring(1).trim());
                 int yCoord = Integer.valueOf(parts[1].trim().substring(0, parts[1].trim().length() - 1).trim()); // set the variables to the x and y values inputted
-                if (xCoord > play.length/2 || xCoord < -play.length/2 || yCoord > play.length/2 || yCoord < -play.length/2) { // if the coordinates are out of the range
+                if (xCoord > userBoard.length/2 || xCoord < -userBoard.length/2 || yCoord > userBoard.length/2 || yCoord < -userBoard.length/2) { // if the coordinates are out of the range
                     coordinateField.setText("");
                     errorLabel.setVisible(true);
                     errorLabel.setFont(new Font("Verdana", Font.BOLD, 30));
@@ -688,15 +688,15 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                     int xCoord = 0;
                     int yCoord = yInt; // set the begining x and y coordinates
                     int count = 0, count2 = 0;
-                    for (int i = 0; i < play.length; i++) {
-                        for (int j = 0; j < play.length; j++) {
-                            if (play2[i][j].getText().equals("X")) count++; // counter the nuumber of X's on the board before the slope is added
+                    for (int i = 0; i < userBoard.length; i++) {
+                        for (int j = 0; j < userBoard.length; j++) {
+                            if (computerBoard[i][j].getText().equals("X")) count++; // counter the nuumber of X's on the board before the slope is added
                         }
                     }
                         xCoord = 0;
                         yCoord = yInt; // set the begining x and y coordinates
-                        while (xCoord <= play.length/2 && xCoord >= -play.length/2) { // continue the line until it reaches the end of the graph
-                            if (yCoord <= play.length/2 && yCoord >= -play.length/2) {
+                        while (xCoord <= userBoard.length/2 && xCoord >= -userBoard.length/2) { // continue the line until it reaches the end of the graph
+                            if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
                                 int temp = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
                                 if (temp == 1) {
                                     riseTextField.setBackground(Color.lightGray);
@@ -716,8 +716,8 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                         }
                         xCoord = 0;
                         yCoord = yInt; // set the begining x and y coordinates
-                        while (xCoord <= play.length/2 && xCoord >= -play.length/2) {
-                            if (yCoord <= play.length/2 && yCoord >= -play.length/2) {
+                        while (xCoord <= userBoard.length/2 && xCoord >= -userBoard.length/2) {
+                            if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
                                 int temp = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
                                 if (temp == 1) {
                                     riseTextField.setBackground(Color.lightGray);
@@ -735,9 +735,9 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                             xCoord -= run;
                             yCoord -= rise; // increment the x and y values with the rise and run values, decreasing
                         }
-                        for (int i = 0; i < play.length; i++) {
-                            for (int j = 0; j < play.length; j++) {
-                                if (play2[i][j].getText().equals("X")) count2++; // counter the nuumber of X's on the board after the slope is added
+                        for (int i = 0; i < userBoard.length; i++) {
+                            for (int j = 0; j < userBoard.length; j++) {
+                                if (computerBoard[i][j].getText().equals("X")) count2++; // counter the nuumber of X's on the board after the slope is added
                             }
                         }
                         if (winner) { // if there is a winner
@@ -786,29 +786,29 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
      */
     public int guessSpot(int xCoord, int yCoord) {
         java.util.Timer timer4 = new java.util.Timer();
-        int middle = play.length/2; // middle of the game (0, 0)
+        int middle = userBoard.length/2; // middle of the game (0, 0)
         yCoord = -yCoord; // y value will be inverted because of how the JButtons are arranged
         if (playerTurn % 2 == 0) { // if it is the user's turn
-            if (!play2[middle + xCoord][middle + yCoord].getText().equals("X")) { // if the guessed coordinate isnt already guessed
-                if (!play2[middle + xCoord][middle + yCoord].getText().equals(""))  { // if there is a ship, mark a red X
-                    play2[middle + xCoord][middle + yCoord].setForeground(Color.RED);
-                    play2[middle + xCoord][middle + yCoord].setText("X");
-                    play2[middle + xCoord][middle + yCoord].setFont(new Font("Verdana", Font.BOLD, 50));
+            if (!computerBoard[middle + xCoord][middle + yCoord].getText().equals("X")) { // if the guessed coordinate isnt already guessed
+                if (!computerBoard[middle + xCoord][middle + yCoord].getText().equals(""))  { // if there is a ship, mark a red X
+                    computerBoard[middle + xCoord][middle + yCoord].setForeground(Color.RED);
+                    computerBoard[middle + xCoord][middle + yCoord].setText("X");
+                    computerBoard[middle + xCoord][middle + yCoord].setFont(new Font("Verdana", Font.BOLD, 50));
                 }
                 else { // if there is no ship, mark a black X
-                    play2[middle + xCoord][middle + yCoord].setForeground(Color.BLACK);
-                    play2[middle + xCoord][middle + yCoord].setText("X");
-                    play2[middle + xCoord][middle + yCoord].setFont(new Font("Verdana", Font.BOLD, 50));
+                    computerBoard[middle + xCoord][middle + yCoord].setForeground(Color.BLACK);
+                    computerBoard[middle + xCoord][middle + yCoord].setText("X");
+                    computerBoard[middle + xCoord][middle + yCoord].setFont(new Font("Verdana", Font.BOLD, 50));
                 }
                 //Counting the number of ships after every turn to determine if there is a sink and if you win
                 if (shipCheck1) counter3 = 0; // only reset the value if the ship has not already sunk
                 if (shipCheck2) counter2 = 0;
                 if (shipCheck3) counter1 = 0;
-                for (int i = 0 ; i < play2.length; i++) {
-                    for (int j = 0; j < play2.length; j++) {
-                        if (shipCheck1 && play2[i][j].getText().equals("3")) counter3++; // count the number of each boat for the user
-                        if (shipCheck2 && play2[i][j].getText().equals("4")) counter2++;
-                        if (shipCheck3 && play2[i][j].getText().equals("5")) counter1++;
+                for (int i = 0 ; i < computerBoard.length; i++) {
+                    for (int j = 0; j < computerBoard.length; j++) {
+                        if (shipCheck1 && computerBoard[i][j].getText().equals("3")) counter3++; // count the number of each boat for the user
+                        if (shipCheck2 && computerBoard[i][j].getText().equals("4")) counter2++;
+                        if (shipCheck3 && computerBoard[i][j].getText().equals("5")) counter1++;
                     }
                 }
                 if (counter1 == 0 || counter2 == 0 || counter3 == 0) {
@@ -848,26 +848,26 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
             }
         }
         else { // if it is the computer's turn
-            if (!play[middle + xCoord][middle + yCoord].getText().equals("X")) { // if the guessed coordinate isnt already guessed
-                if (!play[middle + xCoord][middle + yCoord].getText().equals(""))  { // if there is a ship, mark a red X
-                    play[middle + xCoord][middle + yCoord].setForeground(Color.RED);
-                    play[middle + xCoord][middle + yCoord].setText("X");
-                    play[middle + xCoord][middle + yCoord].setFont(new Font("Verdana", Font.BOLD, 50));
+            if (!userBoard[middle + xCoord][middle + yCoord].getText().equals("X")) { // if the guessed coordinate isnt already guessed
+                if (!userBoard[middle + xCoord][middle + yCoord].getText().equals(""))  { // if there is a ship, mark a red X
+                    userBoard[middle + xCoord][middle + yCoord].setForeground(Color.RED);
+                    userBoard[middle + xCoord][middle + yCoord].setText("X");
+                    userBoard[middle + xCoord][middle + yCoord].setFont(new Font("Verdana", Font.BOLD, 50));
                 }
                 else { // if there is no ship, mark a black X
-                    play[middle + xCoord][middle + yCoord].setForeground(Color.BLACK);
-                    play[middle + xCoord][middle + yCoord].setText("X");
-                    play[middle + xCoord][middle + yCoord].setFont(new Font("Verdana", Font.BOLD, 50));
+                    userBoard[middle + xCoord][middle + yCoord].setForeground(Color.BLACK);
+                    userBoard[middle + xCoord][middle + yCoord].setText("X");
+                    userBoard[middle + xCoord][middle + yCoord].setFont(new Font("Verdana", Font.BOLD, 50));
                 }
                 //Counting the number of ships after every turn to determine if there is a sink and if you win
                 if (p2ShipCheck1) p2Counter3 = 0; // only reset the value if the ship has not already sunk
                 if (p2ShipCheck2) p2Counter2 = 0;
                 if (p2ShipCheck3) p2Counter1 = 0;
-                for (int i = 0 ; i < play.length; i++) {
-                    for (int j = 0; j < play.length; j++) {
-                        if (p2ShipCheck1 && play[i][j].getText().equals("0")) p2Counter3++; // count the number of each boat for the computer
-                        if (p2ShipCheck2 && play[i][j].getText().equals("2")) p2Counter2++;
-                        if (p2ShipCheck3 && play[i][j].getText().equals("1")) p2Counter1++;
+                for (int i = 0 ; i < userBoard.length; i++) {
+                    for (int j = 0; j < userBoard.length; j++) {
+                        if (p2ShipCheck1 && userBoard[i][j].getText().equals("0")) p2Counter3++; // count the number of each boat for the computer
+                        if (p2ShipCheck2 && userBoard[i][j].getText().equals("2")) p2Counter2++;
+                        if (p2ShipCheck3 && userBoard[i][j].getText().equals("1")) p2Counter1++;
                     }
                 }
                 if (p2Counter1 == 0 || p2Counter2 == 0 || p2Counter3 == 0) {
@@ -922,10 +922,10 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
             @Override
             public void run() {
                 if (count == 0) { // first iteration of the timer
-                    for (int i = 0; i < play.length; i++) {
-                        for (int j = 0; j < play[0].length; j++) {
-                            play[i][j].setVisible(true);
-                            play2[i][j].setVisible(false);  // set the board to the player's board for the computer to guess
+                    for (int i = 0; i < userBoard.length; i++) {
+                        for (int j = 0; j < userBoard[0].length; j++) {
+                            userBoard[i][j].setVisible(true);
+                            computerBoard[i][j].setVisible(false);  // set the board to the player's board for the computer to guess
                         }
                     }
                     turnJLabel.setText("<html>Computer's<br/>Turn</html>"); // indicate its the computer's turn
@@ -933,8 +933,8 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                 }
                 else if (count == 1) {// second interation
                     if (difficulty == 1) { // if difficulty is coordinate version
-                        int xCoord = (int)Math.floor(Math.random()*((play.length/2)-(-play.length/2)+1)+(-play.length/2));
-                        int yCoord = (int)Math.floor(Math.random()*((play.length/2)-(-play.length/2)+1)+(-play.length/2));
+                        int xCoord = (int)Math.floor(Math.random()*((userBoard.length/2)-(-userBoard.length/2)+1)+(-userBoard.length/2));
+                        int yCoord = (int)Math.floor(Math.random()*((userBoard.length/2)-(-userBoard.length/2)+1)+(-userBoard.length/2));
                         coordinateField.setText("(" + xCoord + ", " + yCoord + ")");
                         if (guessSpot(xCoord, yCoord) == 1) count++; // if the coordiate is valid increment the counter
                         else if(guessSpot(xCoord, yCoord) == 2){  // if the computer wins the game
@@ -948,10 +948,10 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                         boolean winner = false;
                         rise = 0;
                         run = 0;
-                        yInt = (int)Math.floor(Math.random()*((play.length)-(-play.length)+1)+(-play.length)); // randomize nubers within the range of the board
+                        yInt = (int)Math.floor(Math.random()*((userBoard.length)-(-userBoard.length)+1)+(-userBoard.length)); // randomize nubers within the range of the board
                         while (rise == 0 || run == 0) { //make sure neither of the values are equal to 0
-                            rise = (int)Math.floor(Math.random()*((play.length/2)-(-play.length/2)+1)+(-play.length/2));
-                            run = (int)Math.floor(Math.random()*((play.length/2)-(-play.length/2)+1)+(-play.length/2));
+                            rise = (int)Math.floor(Math.random()*((userBoard.length/2)-(-userBoard.length/2)+1)+(-userBoard.length/2));
+                            run = (int)Math.floor(Math.random()*((userBoard.length/2)-(-userBoard.length/2)+1)+(-userBoard.length/2));
                         }
                         int simplifyFraction = greatestCommonDenominator(rise, run); //find the greatest common denominator between the 2 numbers
                         rise /= simplifyFraction; // diving the rise and run by the gcd found
@@ -960,9 +960,9 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                         int yCoord = yInt; //set the beginning values of the x and y coordinates
 
                         int count1 = 0, count2 = 0;
-                        for (int i = 0; i < play.length; i++) {
-                            for (int j = 0; j < play.length; j++) {
-                                if (play[i][j].getText().equals("X")) count1++; // counter the number of X's before the slope is added
+                        for (int i = 0; i < userBoard.length; i++) {
+                            for (int j = 0; j < userBoard.length; j++) {
+                                if (userBoard[i][j].getText().equals("X")) count1++; // counter the number of X's before the slope is added
                             }
                         }
                             riseTextField.setText(String.valueOf(rise)); // display the values that the computer is guessing on the text feilds, so the user knows what the computer guessed
@@ -970,8 +970,8 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                             yIntTextField.setText(String.valueOf(yInt));
                             xCoord = 0;
                             yCoord = yInt; //set the beginning values of the x and y coordinates
-                            while (xCoord <= play.length/2  && xCoord >= -play.length/2) {
-                                if (yCoord <= play.length/2 && yCoord >= -play.length/2) {
+                            while (xCoord <= userBoard.length/2  && xCoord >= -userBoard.length/2) {
+                                if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
                                     int temp = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
                                     if(temp == 2){ // if there is a winner, set winner to true
                                         winner = true;
@@ -982,8 +982,8 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                             }
                             xCoord = 0;
                             yCoord = yInt; //set the beginning values of the x and y coordinates
-                            while (xCoord <= play.length/2 && xCoord >= -play.length/2) {
-                                if (yCoord <= play.length/2 && yCoord >= -play.length/2) {
+                            while (xCoord <= userBoard.length/2 && xCoord >= -userBoard.length/2) {
+                                if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
                                     int temp = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
                                     if(temp == 2){ // if there is a winner, set winner to true
                                         winner = true;
@@ -993,19 +993,19 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                                 yCoord -= rise;
                             }
                             if (winner) timer3.cancel(); //if there is a winner stop the timer prevent the game from continuing
-                            for (int i = 0; i < play.length; i++) {
-                                for (int j = 0; j < play.length; j++) {
-                                    if (play2[i][j].getText().equals("X")) count2++; //count the number of X's after the slope is added
+                            for (int i = 0; i < userBoard.length; i++) {
+                                for (int j = 0; j < userBoard.length; j++) {
+                                    if (computerBoard[i][j].getText().equals("X")) count2++; //count the number of X's after the slope is added
                                 }
                             }
                             if(count1 != count2) count++; // if counter does not equal count2 (the number of X's before and after the slope is different), increment counter
                     }
                 }
                 else { // last iteration
-                    for (int i = 0; i < play.length; i++) {
-                        for (int j = 0; j < play[0].length; j++) {
-                            play[i][j].setVisible(false);
-                            play2[i][j].setVisible(true); // set the board to the computer's board for the user to guess on
+                    for (int i = 0; i < userBoard.length; i++) {
+                        for (int j = 0; j < userBoard[0].length; j++) {
+                            userBoard[i][j].setVisible(false);
+                            computerBoard[i][j].setVisible(true); // set the board to the computer's board for the user to guess on
                         }
                     }
                     playerTurn++; // increment player turn
