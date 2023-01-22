@@ -133,7 +133,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
         coordinateLabel.setVisible(false);
         add(coordinateLabel);
 
-        equationLabel.setBounds(600, 250, 300, 150); //label that syas "y = —x + b"
+        equationLabel.setBounds(600, 250, 300, 150); //label that says "y = — x + b"
         equationLabel.setFont(new Font("Verdana", Font.BOLD, 50));
         equationLabel.setForeground(Color.WHITE);
         equationLabel.setVisible(false);
@@ -253,8 +253,8 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
         });
         for (int i = 0; i < userBoard.length; i++) {
             for (int j = 0; j < userBoard.length; j++) {
-                buttonPressed(i, j); // initialize what happes to the buttons over hover and when pressed
-                bottonHover(i, j);
+                buttonPressed(i, j); // initialize what happens to the buttons over hover and when pressed
+                buttonHover(i, j);
             }
         }
 
@@ -278,7 +278,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
      * if the userBoard again button is pressed, create a new game
      * @return void
      */
-    public void playAgain() { // if userBoard again is pressed, detroy the current JFrame and create a new one.
+    public void playAgain() { // if userBoard again is pressed, destroy the current JFrame and create a new one.
         dispose(); // destroy the current JFrame
         new gameFrame(); // create a new JFrame
     }
@@ -290,7 +290,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
      * @param int yCoord, the y value of the button
      * @return void
      */
-    public void bottonHover(int xCoord, int yCoord) {
+    public void buttonHover(int xCoord, int yCoord) {
         
         userBoard[xCoord][yCoord].addMouseListener(new java.awt.event.MouseAdapter() {
             /**
