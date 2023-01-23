@@ -621,17 +621,18 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                 }
                 else {
                     coordinateField.setText("");
-                    if (guessSpot(xCoord, yCoord) == 1) { // if the coordinate is valid 
+                    int coordinatePlaced = guessSpot(xCoord, yCoord);
+                    if (coordinatePlaced == 1) { // if the coordinate is valid 
                         coordinateField.setBackground(Color.lightGray);
                         coordinateField.setFocusable(false);
                         playerTurn++;
                         botGuessShip();
                     }
-                    else if(guessSpot(xCoord, yCoord) == 2){ // if the coordinate is valid and you win the game
+                    else if(coordinatePlaced == 2){ // if the coordinate is valid and you win the game
                         coordinateField.setBackground(Color.lightGray);
                         coordinateField.setFocusable(false);
                     }
-                    else { // if you have laready guessed that previously
+                    else { // if you have already guessed that previously
                         errorLabel.setVisible(true);
                         errorLabel.setFont(new Font("Verdana", Font.BOLD, 25));
                         errorLabel.setText("You already guessed that");
@@ -693,8 +694,8 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                         yCoord = yInt; // set the begining x and y coordinates
                         while (xCoord <= userBoard.length/2 && xCoord >= -userBoard.length/2) { // continue the line until it reaches the end of the graph
                             if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
-                                int temp = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
-                                if (temp == 1) {
+                                int coordinatePlaced = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
+                                if (coordinatePlaced == 1) {
                                     riseTextField.setBackground(Color.lightGray);
                                     riseTextField.setFocusable(false);
                                     runTextField.setBackground(Color.lightGray);
@@ -703,7 +704,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                                     yIntTextField.setFocusable(false);
                                     
                                 }
-                                else if(temp == 2){ // if there is a winner set the boolean winner to true
+                                else if(coordinatePlaced == 2){ // if there is a winner set the boolean winner to true
                                     winner = true;
                                 }
                             }
@@ -714,8 +715,8 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                         yCoord = yInt; // set the begining x and y coordinates
                         while (xCoord <= userBoard.length/2 && xCoord >= -userBoard.length/2) {
                             if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
-                                int temp = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
-                                if (temp == 1) {
+                                int coordinatePlaced = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
+                                if (coordinatePlaced == 1) {
                                     riseTextField.setBackground(Color.lightGray);
                                     riseTextField.setFocusable(false);
                                     runTextField.setBackground(Color.lightGray);
@@ -724,7 +725,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                                     yIntTextField.setFocusable(false);
                                     
                                 }
-                                else if(temp == 2){  // if there is a winner set the boolean winner to true
+                                else if(coordinatePlaced == 2){  // if there is a winner set the boolean winner to true
                                     winner = true;
                                 }
                             }
@@ -744,7 +745,7 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                             yIntTextField.setBackground(Color.lightGray);
                             yIntTextField.setFocusable(false);
                         }
-                        else if (count != count2){ // if the number of X's before the slope doesn't equal the number of X's after, this means they already guessed that coordinate and it would not make a difference
+                        else if (count != count2){ // if the number of X's before the slope doesn't equal the number of X's after, this means they haven't guessed that slope
                             playerTurn++; //increment player turn
                             botGuessShip(); // tell the computer to guess a slope
                         }
@@ -932,8 +933,9 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                         int xCoord = (int)Math.floor(Math.random()*((userBoard.length/2)-(-userBoard.length/2)+1)+(-userBoard.length/2));
                         int yCoord = (int)Math.floor(Math.random()*((userBoard.length/2)-(-userBoard.length/2)+1)+(-userBoard.length/2));
                         coordinateField.setText("(" + xCoord + ", " + yCoord + ")");
-                        if (guessSpot(xCoord, yCoord) == 1) count++; // if the coordiate is valid increment the counter
-                        else if(guessSpot(xCoord, yCoord) == 2){  // if the computer wins the game
+                        int coordinatePlaced = guessSpot(xCoord, yCoord);
+                        if (coordinatePlaced == 1) count++; // if the coordiate is valid increment the counter
+                        else if(coordinatePlaced == 2){  // if the computer wins the game
                             coordinateField.setBackground(Color.lightGray); // dont allow any more inputs
                             coordinateField.setFocusable(false);
                             timer3.cancel(); // stop the timer
@@ -968,8 +970,8 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                             yCoord = yInt; //set the beginning values of the x and y coordinates
                             while (xCoord <= userBoard.length/2  && xCoord >= -userBoard.length/2) {
                                 if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
-                                    int temp = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
-                                    if(temp == 2){ // if there is a winner, set winner to true
+                                    int coordinatePlaced = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
+                                    if(coordinatePlaced == 2){ // if there is a winner, set winner to true
                                         winner = true;
                                     }
                                 }
@@ -980,8 +982,8 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                             yCoord = yInt; //set the beginning values of the x and y coordinates
                             while (xCoord <= userBoard.length/2 && xCoord >= -userBoard.length/2) {
                                 if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
-                                    int temp = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
-                                    if(temp == 2){ // if there is a winner, set winner to true
+                                    int coordinatePlaced = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
+                                    if(coordinatePlaced == 2){ // if there is a winner, set winner to true
                                         winner = true;
                                     }
                                 }
