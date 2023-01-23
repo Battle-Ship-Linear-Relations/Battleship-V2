@@ -690,70 +690,70 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                             if (computerBoard[i][j].getText().equals("X")) count++; // counter the nuumber of X's on the board before the slope is added
                         }
                     }
-                        xCoord = 0;
-                        yCoord = yInt; // set the begining x and y coordinates
-                        while (xCoord <= userBoard.length/2 && xCoord >= -userBoard.length/2) { // continue the line until it reaches the end of the graph
-                            if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
-                                int coordinatePlaced = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
-                                if (coordinatePlaced == 1) {
-                                    riseTextField.setBackground(Color.lightGray);
-                                    riseTextField.setFocusable(false);
-                                    runTextField.setBackground(Color.lightGray);
-                                    runTextField.setFocusable(false);
-                                    yIntTextField.setBackground(Color.lightGray);
-                                    yIntTextField.setFocusable(false);
-                                    
-                                }
-                                else if(coordinatePlaced == 2){ // if there is a winner set the boolean winner to true
-                                    winner = true;
-                                }
+                    xCoord = 0;
+                    yCoord = yInt; // set the begining x and y coordinates
+                    while (xCoord <= userBoard.length/2 && xCoord >= -userBoard.length/2) { // continue the line until it reaches the end of the graph
+                        if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
+                            int coordinatePlaced = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
+                            if (coordinatePlaced == 1) {
+                                riseTextField.setBackground(Color.lightGray);
+                                riseTextField.setFocusable(false);
+                                runTextField.setBackground(Color.lightGray);
+                                runTextField.setFocusable(false);
+                                yIntTextField.setBackground(Color.lightGray);
+                                yIntTextField.setFocusable(false);
+                                
                             }
-                            xCoord += run;
-                            yCoord += rise; // increment the x and y values with the rise and run values, increasing
-                        }
-                        xCoord = 0;
-                        yCoord = yInt; // set the begining x and y coordinates
-                        while (xCoord <= userBoard.length/2 && xCoord >= -userBoard.length/2) {
-                            if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
-                                int coordinatePlaced = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
-                                if (coordinatePlaced == 1) {
-                                    riseTextField.setBackground(Color.lightGray);
-                                    riseTextField.setFocusable(false);
-                                    runTextField.setBackground(Color.lightGray);
-                                    runTextField.setFocusable(false);
-                                    yIntTextField.setBackground(Color.lightGray);
-                                    yIntTextField.setFocusable(false);
-                                    
-                                }
-                                else if(coordinatePlaced == 2){  // if there is a winner set the boolean winner to true
-                                    winner = true;
-                                }
-                            }
-                            xCoord -= run;
-                            yCoord -= rise; // increment the x and y values with the rise and run values, decreasing
-                        }
-                        for (int i = 0; i < userBoard.length; i++) {
-                            for (int j = 0; j < userBoard.length; j++) {
-                                if (computerBoard[i][j].getText().equals("X")) count2++; // counter the nuumber of X's on the board after the slope is added
+                            else if(coordinatePlaced == 2){ // if there is a winner set the boolean winner to true
+                                winner = true;
                             }
                         }
-                        if (winner) { // if there is a winner
-                            riseTextField.setBackground(Color.lightGray);
-                            riseTextField.setFocusable(false);
-                            runTextField.setBackground(Color.lightGray);
-                            runTextField.setFocusable(false);
-                            yIntTextField.setBackground(Color.lightGray);
-                            yIntTextField.setFocusable(false);
+                        xCoord += run;
+                        yCoord += rise; // increment the x and y values with the rise and run values, increasing
+                    }
+                    xCoord = 0;
+                    yCoord = yInt; // set the begining x and y coordinates
+                    while (xCoord <= userBoard.length/2 && xCoord >= -userBoard.length/2) {
+                        if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
+                            int coordinatePlaced = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
+                            if (coordinatePlaced == 1) {
+                                riseTextField.setBackground(Color.lightGray);
+                                riseTextField.setFocusable(false);
+                                runTextField.setBackground(Color.lightGray);
+                                runTextField.setFocusable(false);
+                                yIntTextField.setBackground(Color.lightGray);
+                                yIntTextField.setFocusable(false);
+                                
+                            }
+                            else if(coordinatePlaced == 2){  // if there is a winner set the boolean winner to true
+                                winner = true;
+                            }
                         }
-                        else if (count != count2){ // if the number of X's before the slope doesn't equal the number of X's after, this means they haven't guessed that slope
-                            playerTurn++; //increment player turn
-                            botGuessShip(); // tell the computer to guess a slope
+                        xCoord -= run;
+                        yCoord -= rise; // increment the x and y values with the rise and run values, decreasing
+                    }
+                    for (int i = 0; i < userBoard.length; i++) {
+                        for (int j = 0; j < userBoard.length; j++) {
+                            if (computerBoard[i][j].getText().equals("X")) count2++; // counter the nuumber of X's on the board after the slope is added
                         }
-                        else { // if the slope has already been guessed
-                            errorLabel.setVisible(true);
-                            errorLabel.setFont(new Font("Verdana", Font.BOLD, 25));
-                            errorLabel.setText("You already guessed that");
-                        }
+                    }
+                    if (winner) { // if there is a winner
+                        riseTextField.setBackground(Color.lightGray);
+                        riseTextField.setFocusable(false);
+                        runTextField.setBackground(Color.lightGray);
+                        runTextField.setFocusable(false);
+                        yIntTextField.setBackground(Color.lightGray);
+                        yIntTextField.setFocusable(false);
+                    }
+                    else if (count != count2){ // if the number of X's before the slope doesn't equal the number of X's after, this means they haven't guessed that slope
+                        playerTurn++; //increment player turn
+                        botGuessShip(); // tell the computer to guess a slope
+                    }
+                    else { // if the slope has already been guessed
+                        errorLabel.setVisible(true);
+                        errorLabel.setFont(new Font("Verdana", Font.BOLD, 25));
+                        errorLabel.setText("You already guessed that");
+                    }
                 }
             }
             catch (ArithmeticException e) { // if there is any of the following errors (not proper notation, not numerical values, out of bounds of the game)
@@ -963,40 +963,40 @@ public class gameFrame extends JFrame{ //extends JFrame so this class can just b
                                 if (userBoard[i][j].getText().equals("X")) count1++; // counter the number of X's before the slope is added
                             }
                         }
-                            riseTextField.setText(String.valueOf(rise)); // display the values that the computer is guessing on the text feilds, so the user knows what the computer guessed
-                            runTextField.setText(String.valueOf(run));
-                            yIntTextField.setText(String.valueOf(yInt));
-                            xCoord = 0;
-                            yCoord = yInt; //set the beginning values of the x and y coordinates
-                            while (xCoord <= userBoard.length/2  && xCoord >= -userBoard.length/2) {
-                                if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
-                                    int coordinatePlaced = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
-                                    if(coordinatePlaced == 2){ // if there is a winner, set winner to true
-                                        winner = true;
-                                    }
-                                }
-                                xCoord += run;
-                                yCoord += rise;
-                            }
-                            xCoord = 0;
-                            yCoord = yInt; //set the beginning values of the x and y coordinates
-                            while (xCoord <= userBoard.length/2 && xCoord >= -userBoard.length/2) {
-                                if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
-                                    int coordinatePlaced = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
-                                    if(coordinatePlaced == 2){ // if there is a winner, set winner to true
-                                        winner = true;
-                                    }
-                                }
-                                xCoord -= run;
-                                yCoord -= rise;
-                            }
-                            if (winner) timer3.cancel(); //if there is a winner stop the timer prevent the game from continuing
-                            for (int i = 0; i < userBoard.length; i++) {
-                                for (int j = 0; j < userBoard.length; j++) {
-                                    if (computerBoard[i][j].getText().equals("X")) count2++; //count the number of X's after the slope is added
+                        riseTextField.setText(String.valueOf(rise)); // display the values that the computer is guessing on the text feilds, so the user knows what the computer guessed
+                        runTextField.setText(String.valueOf(run));
+                        yIntTextField.setText(String.valueOf(yInt));
+                        xCoord = 0;
+                        yCoord = yInt; //set the beginning values of the x and y coordinates
+                        while (xCoord <= userBoard.length/2  && xCoord >= -userBoard.length/2) {
+                            if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
+                                int coordinatePlaced = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
+                                if(coordinatePlaced == 2){ // if there is a winner, set winner to true
+                                    winner = true;
                                 }
                             }
-                            if(count1 != count2) count++; // if counter does not equal count2 (the number of X's before and after the slope is different), increment counter
+                            xCoord += run;
+                            yCoord += rise;
+                        }
+                        xCoord = 0;
+                        yCoord = yInt; //set the beginning values of the x and y coordinates
+                        while (xCoord <= userBoard.length/2 && xCoord >= -userBoard.length/2) {
+                            if (yCoord <= userBoard.length/2 && yCoord >= -userBoard.length/2) {
+                                int coordinatePlaced = guessSpot(xCoord, yCoord); //set a variable temporarily to check if it successfully places the coordinate and if there is a win
+                                if(coordinatePlaced == 2){ // if there is a winner, set winner to true
+                                    winner = true;
+                                }
+                            }
+                            xCoord -= run;
+                            yCoord -= rise;
+                        }
+                        if (winner) timer3.cancel(); //if there is a winner stop the timer prevent the game from continuing
+                        for (int i = 0; i < userBoard.length; i++) {
+                            for (int j = 0; j < userBoard.length; j++) {
+                                if (computerBoard[i][j].getText().equals("X")) count2++; //count the number of X's after the slope is added
+                            }
+                        }
+                        if(count1 != count2) count++; // if counter does not equal count2 (the number of X's before and after the slope is different), increment counter
                     }
                 }
                 else { // last iteration
